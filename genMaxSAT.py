@@ -9,7 +9,7 @@ import random
 #   generate random Max-SAT problems
 #
 # Parameters:
-#   -n  --  number of selected_x
+#   -n  --  number of variables
 #   -k  --  number of literals per clause
 #   -m  --  number of clauses
 #   -p  --  number of problem instances to generate
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     # parse parameters
     parser = argparse.ArgumentParser(description="Generate random Max-SAT problems.")
-    parser.add_argument("-n", "--n", help="N: number of selected_x", required=True, type=int)
+    parser.add_argument("-n", "--n", help="N: number of variables", required=True, type=int)
     parser.add_argument("-k", "--k", help="K: number of literals per clause", required=True, type=int)
     parser.add_argument("-m", "--m", help="M: number of clauses", required=True, type=int)
     parser.add_argument("-p", "--p", help="P: number of problem instances to generate (default: 1)", required=False, type=int, default=1)
@@ -57,23 +57,23 @@ if __name__ == "__main__":
     p = args.p
 
     if n < 1:
-        print("[Error parameters] N can NOT be less than 1. Exit.")
+        print("[Error parameters] N can NOT be < 1. Exit.")
         exit(0)
 
     if k < 1:
-        print("[Error parameters] K can NOT be less than 1. Exit.")
+        print("[Error parameters] K can NOT be < 1. Exit.")
         exit(0)
 
     if m < 1:
-        print("[Error parameters] M can NOT be less than 1. Exit.")
+        print("[Error parameters] M can NOT be < 1. Exit.")
         exit(0)
 
     if p < 1:
-        print("[Error parameters] P can NOT be less than 1. Exit.")
+        print("[Error parameters] P can NOT be < 1. Exit.")
         exit(0)
 
     if n > k * m:
-        print("[Warning] N is larger than K * M, which means there must be selected_x not existing in any clause.")
+        print("[Warning] N > K * M, which means there must be variables not existing in any clause.")
 
     print("generating " + str(p) + " problems with parameters: N=" + str(n) + ", K=" + str(k) + ", M=" + str(m) + "...")
     filename_prefix = "max-sat-problem-" + str(n) + "-" + str(k) + "-" + str(m) + "-"

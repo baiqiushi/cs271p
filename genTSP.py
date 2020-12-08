@@ -91,6 +91,11 @@ if __name__ == "__main__":
         outfile.write(str(n) + "\n")
         # generate k distinct distance values following N(u,v) normal distribution
         distinct_dists = np.random.normal(loc=u, scale=v, size=k).tolist()
+        # enforce positive distance values
+        # of course, it might violate the distinct and normal distribution intention,
+        # but for now, it is good enough for our purpose of controlling the hardness
+        # of generated problems
+        distinct_dists = [abs(x) for x in distinct_dists]
         # all possible edges in the complete graph matrix
         all_edges = []
         for x in range(0, n):

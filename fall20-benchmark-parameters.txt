@@ -1,0 +1,100 @@
+========================
+    Max-SAT Problems
+========================
+
+------------------------
+1. Number of variables varies from 100 to 100K:
+N = 
+100,
+200,
+500,
+1K,
+2.5K,
+5K,
+10K,
+25K,
+50K,
+100K
+------------------------
+
+------------------------
+2. Only focus on Max-3SAT problem
+K = 3
+------------------------
+
+------------------------
+3. Number of clauses vary from N/7.5 to N/4.3
+Suppose ratio m = N/M, then m is a knob to control the hardness of the problem;
+Intuitively, m means on average how many clauses a variable will appear in.
+When m is very small, extreme example m = 1, which means each variable only occurs in one clause,
+then the problem is very easy to satisfy because there are no constraints between clauses;
+When m is very big, extreme example m = M, which means each variable appears at each clause,
+then the problem is very hard to satisfy because every pair of clauses has constraints;
+Therefore, either m is big or small, to solve the problem becomes trivial.
+While m ranges in [4.3 ~ 7.5], the problem becomes interesting.
+M = 
+N/7.50,
+N/7.15,
+N/6.80,
+N/6.45,
+N/6.10,
+N/5.75,
+N/5.40,
+N/5.05,
+N/4.70,
+N/4.35
+------------------------
+
+In total
+We generate count(N) * count(K) * count(M) problems
+= 10 * 1 * 10
+= 100 problems
+========================
+
+
+
+
+========================
+     TSP Problems
+========================
+
+------------------------
+1. Number of locations varies from 25 to 1000:
+N = 
+25,
+50,
+75,
+100,
+200,
+300,
+400,
+600,
+800,
+1000
+------------------------
+
+------------------------
+2. Number of distinct distance values varies from 0.01*N*N to 0.4*N*N:
+Given N, there are at most (Choose 2 from N) N*(N-1)/2 edges in a complete graph with N nodes.
+We use distinct distance values to control the hardness of the problem.
+K = 
+0.01*N*N,
+0.05*N*N,
+0.1*N*N,
+0.2*N*N,
+0.4*N*N
+------------------------
+
+------------------------
+3. Variance of distances varies between small and big:
+Variance of distances also controls the hardness of the problem.
+V = 
+5%*U, (small)
+25%*U (big)
+------------------------
+
+In total
+We generate count(N) * count(K) * count(V) problems
+= 10 * 5 * 2
+= 100 problems
+========================

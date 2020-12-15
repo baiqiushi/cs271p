@@ -41,6 +41,42 @@ import random
 #
 ###########################################################
 
+
+def gen_max_sat(n, k, m, p):
+    print("generating " + str(p) + " problems with parameters: N=" + str(n) + ", K=" + str(k) + ", M=" + str(m) + "...")
+    filename_prefix = "max-sat-problem-" + str(n) + "-" + str(k) + "-" + str(m) + "-"
+    # loop problem instances
+    for i in range(1, p + 1):
+        filename = filename_prefix + str(i) + ".txt"
+        outfile = open(filename, "w")
+        outfile.write(str(n) + "\n")
+        outfile.write(str(k) + "\n")
+        outfile.write(str(m) + "\n")
+        # init candidate vars list
+        x_candidates = range(1, n + 1)
+        # loop m clauses
+        for j in range(0, m):
+            # randomly sample k vars from candidate vars list without replacement (no duplicates)
+            selected_x = random.sample(x_candidates, k)
+            # remove selected x from candidate vars list
+            x_candidates = [x for x in x_candidates if x not in selected_x]
+            # loop k vars selected
+            clause = []
+            for x in selected_x:
+                # generate positive or negative symbol for var
+                pos_x = random.randint(0, 1)
+                if pos_x == 0:
+                    x = -x
+                clause.append(str(x))
+            outfile.write(" ".join(clause) + "\n")
+
+            # re-populate candidate vars list if it has not enough candidates
+            if len(x_candidates) < k:
+                x_candidates = range(1, n + 1)
+        outfile.close()
+    print("generation is done.")
+
+
 if __name__ == "__main__":
 
     # parse parameters
@@ -75,36 +111,5 @@ if __name__ == "__main__":
     if n > k * m:
         print("[Warning] N > K * M, which means there must be variables not existing in any clause.")
 
-    print("generating " + str(p) + " problems with parameters: N=" + str(n) + ", K=" + str(k) + ", M=" + str(m) + "...")
-    filename_prefix = "max-sat-problem-" + str(n) + "-" + str(k) + "-" + str(m) + "-"
-    # loop problem instances
-    for i in range(1, p + 1):
-        filename = filename_prefix + str(i) + ".txt"
-        outfile = open(filename, "w")
-        outfile.write(str(n) + "\n")
-        outfile.write(str(k) + "\n")
-        outfile.write(str(m) + "\n")
-        # init candidate vars list
-        x_candidates = range(1, n + 1)
-        # loop m clauses
-        for j in range(0, m):
-            # randomly sample k vars from candidate vars list without replacement (no duplicates)
-            selected_x = random.sample(x_candidates, k)
-            # remove selected x from candidate vars list
-            x_candidates = [x for x in x_candidates if x not in selected_x]
-            # loop k vars selected
-            clause = []
-            for x in selected_x:
-                # generate positive or negative symbol for var
-                pos_x = random.randint(0, 1)
-                if pos_x == 0:
-                    x = -x
-                clause.append(str(x))
-            outfile.write(" ".join(clause) + "\n")
-
-            # re-populate candidate vars list if it has not enough candidates
-            if len(x_candidates) < k:
-                x_candidates = range(1, n + 1)
-        outfile.close()
-    print("generation is done.")
+    gen_max_sat(n, k, m, p)
 

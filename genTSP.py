@@ -41,46 +41,8 @@ import copy
 #
 ###########################################################
 
-if __name__ == "__main__":
 
-    # parse parameters
-    parser = argparse.ArgumentParser(description="Generate random Traveling Sales Person problems.")
-    parser.add_argument("-n", "--n", help="N: number of locations", required=True, type=int)
-    parser.add_argument("-k", "--k", help="K: number of distinct distance values to use", required=True, type=int)
-    parser.add_argument("-u", "--u", help="U: mean of normal distribution for distances", required=True, type=int)
-    parser.add_argument("-v", "--v", help="V: variance of normal distribution for distances", required=True, type=int)
-    parser.add_argument("-p", "--p", help="P: number of problem instances to generate (default: 1)", required=False, type=int, default=1)
-    args = parser.parse_args()
-
-    n = args.n
-    k = args.k
-    u = args.u
-    v = args.v
-    p = args.p
-
-    if n < 1:
-        print("[Error parameters] N can NOT be < 1. Exit.")
-        exit(0)
-
-    if k < 1:
-        print("[Error parameters] K can NOT be < 1. Exit.")
-        exit(0)
-
-    if u <= 0:
-        print("[Error parameters] U can NOT be <= 0. Exit.")
-        exit(0)
-
-    if v < 0:
-        print("[Error parameters] V can NOT be < 0. Exit.")
-        exit(0)
-
-    if p < 1:
-        print("[Error parameters] P can NOT be < 1. Exit.")
-        exit(0)
-
-    if n*(n-1)/2 < k:
-        print("[Warning] K > C(2,N)(Choose 2 from N), which means all distance values will be distinct.")
-
+def gen_tsp(n, k, u, v, p):
     print("generating " + str(p) + " problems with parameters: N=" + str(n) +
           ", K=" + str(k) + ", U=" + str(u) + ", V=" + str(v) + "...")
     filename_prefix = "tsp-problem-" + str(n) + "-" + str(k) + "-" + str(u) + "-" + str(v) + "-"
@@ -126,4 +88,47 @@ if __name__ == "__main__":
             outfile.write(" ".join(str(x) for x in graph[x, :].tolist()) + "\n")
         outfile.close()
     print("generation is done.")
+
+
+if __name__ == "__main__":
+
+    # parse parameters
+    parser = argparse.ArgumentParser(description="Generate random Traveling Sales Person problems.")
+    parser.add_argument("-n", "--n", help="N: number of locations", required=True, type=int)
+    parser.add_argument("-k", "--k", help="K: number of distinct distance values to use", required=True, type=int)
+    parser.add_argument("-u", "--u", help="U: mean of normal distribution for distances", required=True, type=int)
+    parser.add_argument("-v", "--v", help="V: variance of normal distribution for distances", required=True, type=int)
+    parser.add_argument("-p", "--p", help="P: number of problem instances to generate (default: 1)", required=False, type=int, default=1)
+    args = parser.parse_args()
+
+    n = args.n
+    k = args.k
+    u = args.u
+    v = args.v
+    p = args.p
+
+    if n < 1:
+        print("[Error parameters] N can NOT be < 1. Exit.")
+        exit(0)
+
+    if k < 1:
+        print("[Error parameters] K can NOT be < 1. Exit.")
+        exit(0)
+
+    if u <= 0:
+        print("[Error parameters] U can NOT be <= 0. Exit.")
+        exit(0)
+
+    if v < 0:
+        print("[Error parameters] V can NOT be < 0. Exit.")
+        exit(0)
+
+    if p < 1:
+        print("[Error parameters] P can NOT be < 1. Exit.")
+        exit(0)
+
+    if n*(n-1)/2 < k:
+        print("[Warning] K > C(2,N)(Choose 2 from N), which means all distance values will be distinct.")
+
+    gen_tsp(n, k, u, v, p)
 

@@ -23,26 +23,22 @@ K = 3
 ------------------------
 
 ------------------------
-3. Number of clauses vary from N/7.5 to N/4.3
-Suppose ratio m = N/M, then m is a knob to control the hardness of the problem;
-Intuitively, m means on average how many clauses a variable will appear in.
-When m is very small, extreme example m = 1, which means each variable only occurs in one clause,
-then the problem is very easy to satisfy because there are no constraints between clauses;
-When m is very big, extreme example m = M, which means each variable appears at each clause,
-then the problem is very hard to satisfy because every pair of clauses has constraints;
-Therefore, either m is big or small, to solve the problem becomes trivial.
-While m ranges in [4.3 ~ 7.5], the problem becomes interesting.
-M = 
-N/7.50,
-N/7.15,
-N/6.80,
-N/6.45,
-N/6.10,
-N/5.75,
-N/5.40,
-N/5.05,
-N/4.70,
-N/4.35
+3. Number of clauses vary from 4.3*N to 7.5*N
+Suppose ratio m = M/N, then m is a knob to control the hardness of the problem;
+Intuitively, m is proportional to the average how many clauses a variable will need to appear in repeatedly.
+For example, if M = 30, N = 10, K = 3 (so m=3), then we need to choose 3 out 10 variables 30 times to fill the 30 clauses
+which means that on average, each variable will appear in 3 clauses at least.
+M =
+4.35*N,
+4.70*N,
+5.05*N,
+5.40*N,
+5.75*N,
+6.10*N,
+6.45*N,
+6.80*N,
+7.15*N,
+7.50*N
 ------------------------
 
 In total

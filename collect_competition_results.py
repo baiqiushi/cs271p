@@ -193,7 +193,7 @@ for problem_type in ["max-sat", "tsp"]:
                 for filename in max_sat_filenames:
                     result_list = results[filename]
                     # sort the list of results (team_id, result) by result value in descending order
-                    sorted(result_list, key=lambda x: x[1], reverse=True)
+                    result_list = sorted(result_list, key=lambda x: x[1], reverse=True)
                     # print a line to the file: problem-file-name, first team_id, result, second_team_id, result, ...
                     row = [filename]
                     row.extend(result_list)
@@ -219,7 +219,7 @@ for problem_type in ["max-sat", "tsp"]:
                 for filename in tsp_filenames:
                     result_list = results[filename]
                     # sort the list of results (team_id, result) by result value in ascending order
-                    sorted(result_list, key=lambda x: x[1])
+                    result_list = sorted(result_list, key=lambda x: x[1])
                     # print a line to the file: problem-file-name, first team_id, result, second_team_id, result, ...
                     row = [filename]
                     row.extend(result_list)
@@ -244,7 +244,7 @@ for problem_type in ["max-sat", "tsp"]:
         # output team_scores for this category to file "{problem_type}_{method}_team_scores.csv"
         team_scores_filename = problem_type + "_" + method + "_team_scores.csv"
         # sort team_scores by score in descending order
-        sorted_team_scores = dict(sorted(team_scores.items(), key=lambda item: item[1]))
+        sorted_team_scores = dict(sorted(team_scores.items(), key=lambda item: item[1], reverse=True))
         with open(team_scores_filename, "w") as csv_out:
             csv_writer = csv.writer(csv_out, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             # print header to the file
